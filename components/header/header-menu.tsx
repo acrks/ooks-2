@@ -1,7 +1,5 @@
-import React from 'react';
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem } from '../ui/navigation-menu';
-
-const currentDate: Date = new Date();
+import Link from 'next/link';
+import { NavigationMenu, NavigationMenuList, NavigationMenuLink, NavigationMenuItem, navigationMenuTriggerStyle } from '../ui/navigation-menu';
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -16,10 +14,16 @@ export function HeaderMenu() {
     return (
         <NavigationMenu>
             <NavigationMenuList className='flex-wrap'>
-                {components.map((component) => (
-                    <NavigationMenuItem key={component.title}>
-                    </NavigationMenuItem>
-                        ))}
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/">Home</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/meeting-organizer">Meeting Organizer</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
     );
