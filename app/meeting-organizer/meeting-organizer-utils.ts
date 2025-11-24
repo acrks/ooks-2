@@ -9,6 +9,8 @@ export function getMeetingTheme() {
             return "How has the week gone thus far and any change in your plans for the rest of the week?"
         case("Friday"):
             return "How did the week go? Did it go as planned?"
+        default:
+            return "No meeting scheduled today."
     }
 }
 
