@@ -2,6 +2,10 @@
 
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
+import { FaMinus } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+
+
 
 export function Announcements() {
     const [generalAnnouncementsOpen, setGeneralAnnouncementsOpen] = useState(false);
@@ -16,8 +20,8 @@ export function Announcements() {
         <div className="flex flex-col gap-2">
             <div className="flex flex-row gap-2 items-center">
             General Announcements
-            <Button onClick={() => setGeneralAnnouncementsOpen(!generalAnnouncementsOpen)} className="self-start">
-                {generalAnnouncementsOpen ? "-" : "+"}
+            <Button onClick={() => setGeneralAnnouncementsOpen(!generalAnnouncementsOpen)} className="cursor-pointer self-start">
+                {generalAnnouncementsOpen ? <FaMinus /> : <FaPlus />}
             </Button>
             </div>
             <div>
@@ -28,7 +32,7 @@ export function Announcements() {
             {generalAnnouncementsOpen && (
             <div className="flex flex-col gap-2">
             <textarea value={announcement} onChange={e => setAnnouncement(e.target.value)} className="w-full h-12 border-2 border-solid border-gray-300 rounded-md p-2 resize-none" placeholder="Enter announcements here..." />
-            <Button disabled={announcement.trim() === ""} onClick={logAnnouncement} className="self-start">Log Announcement</Button>
+            <Button disabled={announcement.trim() === ""} onClick={logAnnouncement} className="self-start cursor-pointer">Log Announcement</Button>
             </div>
             )}  
         </div>

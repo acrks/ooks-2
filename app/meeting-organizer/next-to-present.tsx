@@ -23,23 +23,23 @@ export default function NextToPresent() {
 
     return (
         <>
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-4">
             {/* Yet to Present Column */}
-            <div className="flex flex-col w-1/3 gap-2 items-center border-2 border-solid border-blue-700 p-4">
-            <h4 className="text-xl font-bold">Yet To Present</h4>
-            <ul className="flex flex-col gap-2 w-3/4">
-                {yetToPresentIndexes.map((index) => (
-                    <li key={index} className="cursor-pointer" onClick={() => {
-                        if (presentingIndex >= 0) {
-                            setPresentedIndexes(presentedIndexes.concat(presentingIndex));
-                        }
-                        setPresentingIndex(index);
-                        setYetToPresentIndexes(prevIndexes => prevIndexes.filter(i => i !== index));
-                    }}>{meetingParticipants[index]}</li>
-                ))}
-            </ul>
+            <div className="flex flex-col w-1/3 gap-2 items-center rounded-2xl border-2 border-solid border-grey-500 shadow-md p-4">
+                <h4 className="text-xl font-bold">Yet To Present</h4>
+                <ul className="flex flex-col gap-2 w-3/4">
+                    {yetToPresentIndexes.map((index) => (
+                        <li key={index} className="cursor-pointer" onClick={() => {
+                            if (presentingIndex >= 0) {
+                                setPresentedIndexes(presentedIndexes.concat(presentingIndex));
+                            }
+                            setPresentingIndex(index);
+                            setYetToPresentIndexes(prevIndexes => prevIndexes.filter(i => i !== index));
+                        }}>{meetingParticipants[index]}</li>
+                    ))}
+                </ul>
             </div>
-                <div className="flex flex-col w-1/3 border-2 border-solid border-green-700 items-center p-4">
+                <div className="flex flex-col w-1/3 border-2 border-solid rounded-2xl border-grey-500 items-center shadow-md p-4">
                 {
                     presentedIndexes.length == Object.keys(meetingParticipants).length ?
                     <h2 className="text-xl font-bold">🎊 All Done! 🎊</h2>
@@ -60,7 +60,7 @@ export default function NextToPresent() {
             } 
             </div>
         {/* Presented Column */}
-        <div className="flex flex-col items-center w-1/3 border-2 border-solid border-purple-700 p-4">
+        <div className="flex flex-col items-center w-1/3 rounded-2xl border-2 border-solid border-grey-500 shadow-md p-4">
             <h4 className="text-xl font-bold">Presented</h4>
                 <ul className="flex flex-col gap-2 w-3/4">
 
