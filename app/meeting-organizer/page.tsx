@@ -7,11 +7,10 @@ type MeetingOrganizerProps = object
 function MeetingOrganizer(props: MeetingOrganizerProps) {
     const day = getDay();
     return (
-        <div>
-            <h1>Meeting Organizer</h1>
+        <div className="flex flex-col gap-2">
+            <h1 className="text-2xl font-bold text-center text-gray-800">Meeting Organizer</h1>
             <p>{day}</p>
             <MeetingTheme />
-            <h2>Next to Present</h2>
             <NextToPresent />
         </div>
     );

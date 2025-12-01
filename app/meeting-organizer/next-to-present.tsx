@@ -1,34 +1,10 @@
 'use client'
 
-import { getMeetingTheme } from "./utils";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { meetingParticipants, subTeams } from "./const";
 
 export default function NextToPresent() {
-
-    const meetingParticipants: { [key: number]: string } = {
-        1: 'Alex',
-        2: 'Tyler',
-        3: 'Albert',
-        4: 'Srini',
-        5: 'Jay',
-        6: 'Walter',
-        7: 'Oliver',
-        8: 'Ramzi',
-        9: 'Dennis',
-        10: 'Michael',
-        11: 'Julie',
-        12: 'QA',
-        13: 'Product',
-        14: 'Travis'
-    }
-
-    const subTeams = {
-        'Design': ['Chris', 'Hanley'],
-        'QA': ['Fernando', 'Yuga', 'Kiefer', 'Ben'],
-        'Product': ['Al', 'Chinny']
-    }
-
     const [presentingIndex, setPresentingIndex] = useState(-1);
     const [presentedIndexes, setPresentedIndexes] = useState<number[]>([]);
     const [yetToPresentIndexes, setYetToPresentIndexes] = useState<number[]>(Object.keys(meetingParticipants).map(Number));
@@ -49,37 +25,47 @@ export default function NextToPresent() {
         <>
         <div className="flex justify-center">
             {/* Yet to Present Column */}
-            <div className="flex flex-col w-1/3 items-center border-2 border-solid border-blue-700">
-            <h4>Yet To Present</h4>
-            <div className="border-2 border-solid border-orange-400">
-
-            <ul>
+            <div className="flex flex-col w-1/3 gap-2 items-center border-2 border-solid border-blue-700">
+            <h4 className="text-xl font-bold">Yet To Present</h4>
+            <ul className="flex flex-col gap-2 w-3/4">
                 {yetToPresentIndexes.map((index) => (
-                    <li key={index}>{meetingParticipants[index]}</li>
+                    <li key={index} className="cursor-pointer" onClick={() => {
+                        if (presentingIndex >= 0) {
+                            setPresentedIndexes(presentedIndexes.concat(presentingIndex));
+                        }
+                        setPresentingIndex(index);
+                        setYetToPresentIndexes(prevIndexes => prevIndexes.filter(i => i !== index));
+                    }}>{meetingParticipants[index]}</li>
                 ))}
             </ul>
+            </div>
+                <div className="flex flex-col min-h-[50vh] w-1/3 border-2 border-solid border-green-700 items-center">
+                {
+                    presentedIndexes.length == Object.keys(meetingParticipants).length ?
+                    <h2 className="text-xl font-bold">🎊 All Done! 🎊</h2>
+                : <div className="flex flex-col gap-3 items-center">
+                <h4 className="text-xl font-bold">At Bat: </h4>
+                <h4>{presentingIndex >= 0 ? (meetingParticipants[presentingIndex] === 'QA' 
+                || meetingParticipants[presentingIndex] === 'UX' 
+                || meetingParticipants[presentingIndex] === 'Product' ? 
+                <div>
+                    <h4 className="text-l font-bold">{meetingParticipants[presentingIndex]}</h4>
+                    <ul>{subTeams[meetingParticipants[presentingIndex]].map((member, index) => <li key={index}>{member} </li>)}</ul> 
                 </div>
+                    : meetingParticipants[presentingIndex]) : 'Click to start'}</h4>
+                {presentedIndexes.length == Object.keys(meetingParticipants).length ? null : <Button onClick={spinTheWheel} className="cursor-pointer">Spin the Wheel!</Button>}
+                </div>
+            } 
             </div>
-            <div className="flex flex-col w-1/3 border-2 border-solid border-green-700 items-center">
-            {
-                presentedIndexes.length == Object.keys(meetingParticipants).length ?
-                <h2>All Done!</h2>
-                : <>
-                <h4>At Bat: </h4>
-                
-                <h4>{presentingIndex >= 0 ? meetingParticipants[presentingIndex] : 'Click to start'}</h4>
-                <Button onClick={spinTheWheel} className="cursor-pointer">Spin the Wheel</Button>
-                </>
-            }
-        
-            </div>
-            {/* Presenting */}
         {/* Presented Column */}
         <div className="flex flex-col items-center w-1/3 border-2 border-solid border-purple-700">
-            <h4>Presented</h4>
+            <h4 className="text-xl font-bold">Presented</h4>
+                <ul className="flex flex-col gap-2 w-3/4">
+
                 {presentedIndexes.map((index) => (
                     <li key={index}>{meetingParticipants[index]}</li>
                 ))}
+                </ul>
         </div>
 
         </div>
