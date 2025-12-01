@@ -1,16 +1,21 @@
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
 import { getDay } from "./utils";
 import MeetingTheme from "./theme";
 import NextToPresent from "./next-to-present";
+import { Announcements } from "./announcements";
 
-type MeetingOrganizerProps = object
-
-function MeetingOrganizer(props: MeetingOrganizerProps) {
+function MeetingOrganizer() {
     const day = getDay();
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 p-4">
             <h1 className="text-2xl font-bold text-center text-gray-800">Meeting Organizer</h1>
             <p>{day}</p>
             <MeetingTheme />
+            <Announcements />
             <NextToPresent />
         </div>
     );
