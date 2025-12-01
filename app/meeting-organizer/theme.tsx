@@ -1,4 +1,4 @@
-import { getMeetingTheme } from "./meeting-organizer-utils";
+import { getMeetingTheme } from "./utils";
 
 export default function MeetingTheme() {
     const meetingTheme = getMeetingTheme();

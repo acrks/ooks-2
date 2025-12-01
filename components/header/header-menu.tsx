@@ -12,6 +12,7 @@ const components: { title: string; href: string; description: string }[] = [
 
 export function HeaderMenu() {
     return (
+      <div className="w-full flex justify-center border-b-2 border-solid border-gray-300 mb-4 mt-2">
         <NavigationMenu>
             <NavigationMenuList className='flex-wrap'>
         <NavigationMenuItem>
@@ -26,5 +27,6 @@ export function HeaderMenu() {
         </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
+        </div>
     );
 };

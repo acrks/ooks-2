@@ -25,12 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-            <header className="flex justify-center top-0 left-0 right-0 z-50 border-2 border-solid border-red-700">
-        <HeaderMenu />
-      </header>
+            {/* <header className="flex justify-center top-0 left-0 right-0 z-50 border-2 border-solid border-red-700"> */}
+      {/* </header> */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <HeaderMenu />
         {children}
       </body>
     </html>
