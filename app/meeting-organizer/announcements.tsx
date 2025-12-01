@@ -9,7 +9,6 @@ export function Announcements() {
     const [announcement, setAnnouncement] = useState("")
 
     function logAnnouncement() {
-        // Placeholder function to log announcements
         setAnnouncements([...announcements, announcement])
         setAnnouncement("")
     }

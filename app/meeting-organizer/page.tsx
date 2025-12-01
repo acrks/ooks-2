@@ -13,7 +13,7 @@ function MeetingOrganizer() {
     return (
         <div className="flex flex-col gap-2 p-4">
             <h1 className="text-2xl font-bold text-center text-gray-800">Meeting Organizer</h1>
-            <p>{day}</p>
+            <p className="text-xl font-bold text-center text-gray-800">{day}</p>
             <MeetingTheme />
             <Announcements />
             <NextToPresent />
