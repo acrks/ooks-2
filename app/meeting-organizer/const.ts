@@ -17,7 +17,14 @@ export const meetingParticipants: { [key: number]: string } = {
 }
 
 export const subTeams = {
-        'UX': ['Chris', 'Hanley', 'Jonathan'],
-        'QA': ['Ben','Fernando', 'Yuga', 'Kiefer'],
-        'Product': ['Al', 'Chinny']
-    }
+    'UX': ['Chris', 'Hanley', 'Jonathan'],
+    'QA': ['Ben','Fernando', 'Yuga', 'Kiefer'],
+    'Product': ['Al', 'Chinny']
+}
+
+export const themes = {
+    "Monday": "What do you plan to work on this week?",
+    "Wednesday": "How has the week gone thus far and any change in your plans for the rest of the week?",
+    "Friday": "How did the week go? Did it go as planned?",
+    "default": "No meeting scheduled today."
+}
