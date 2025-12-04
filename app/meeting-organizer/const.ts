@@ -1,3 +1,5 @@
+import { ReactElement } from "react"
+
 export const meetingParticipants: { [key: number]: string } = {
     1: 'Alex',
     2: 'Tyler',
@@ -27,4 +29,12 @@ export const themes = {
     "Wednesday": "How has the week gone thus far and any change in your plans for the rest of the week?",
     "Friday": "How did the week go? Did it go as planned?",
     "default": "No meeting scheduled today."
+}
+
+export interface announcementTraits {
+    "button": ReactElement,
+    "inset": string,
+    "bg": string,
+    "placeholderText": string,
+    "emoji": string
 }
