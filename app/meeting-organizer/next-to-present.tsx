@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { meetingParticipants , subTeams } from "./const";
 import SubmitWorkerNotes from "./submit-worker-notes";
 import DisplayWorkerNotes from "./display-worker-notes";
+import { HiChevronDoubleRight } from "react-icons/hi";
 
 export default function NextToPresent() {
     const [presentingIndex, setPresentingIndex] = useState(-1);
@@ -24,6 +25,7 @@ export default function NextToPresent() {
         }
 
     const saveNotes = (index: number, type: 'wins' | 'needsPeerReview' | 'blockers', ticketId: string, notes: string) => {
+        console.log(index, meetingParticipants)
         if (type === 'wins') meetingParticipants[index].wins.push(
             { 'ticketId': ticketId,'notes' :notes }
         );
@@ -31,6 +33,14 @@ export default function NextToPresent() {
         if (type === 'blockers') meetingParticipants[index].blockers.push(
             { 'ticketId': ticketId,'notes' :notes }
         );
+    }
+
+    function cuePresentingIndex(index: number) {
+        if (presentingIndex >= 0) {
+            setPresentedIndexes(presentedIndexes.concat(presentingIndex));
+        }
+        setPresentingIndex(index);
+        setYetToPresentIndexes(prevIndexes => prevIndexes.filter(i => i !== index));
     }
 
     return (
@@ -43,17 +53,13 @@ export default function NextToPresent() {
                 <h4 className="text-xl font-bold">Yet To Present</h4>
                 <ul className="flex flex-col gap-2 w-3/4">
                     {yetToPresentIndexes.map((index) => (
-                        <li key={index} className="cursor-pointer" onClick={() => {
-                            if (presentingIndex >= 0) {
-                                setPresentedIndexes(presentedIndexes.concat(presentingIndex));
-                            }
-                            setPresentingIndex(index);
-                            setYetToPresentIndexes(prevIndexes => prevIndexes.filter(i => i !== index));
-                        }}>{meetingParticipants[index].name}</li>
+                        <li key={index} className="group cursor-pointer flex items-center bg-white rounded-2xl p-2 px-4 justify-between" onClick={() => {cuePresentingIndex(index)}}>
+                            {meetingParticipants[index].name}
+                            <HiChevronDoubleRight className="hidden group-hover:inline-block ml-2 text-green-500" />
+                        </li>
                     ))}
                 </ul>
             </div>
-
                 <div className="flex flex-col min-h-auto w-1/3 border-2 border-solid rounded-2xl border-grey-500 items-center shadow-md bg-background-variant p-4">
                 {
                     presentedIndexes.length == Object.keys(meetingParticipants).length ?
@@ -68,19 +74,19 @@ export default function NextToPresent() {
                     <h4 className="text-l font-bold">{meetingParticipants[presentingIndex].name}</h4>
                     <ul>{subTeams[meetingParticipants[presentingIndex].name].map((member, index) => <li key={index}>{member} </li>)}</ul> 
                 </div>
-                    : 
+                    :
                     meetingParticipants[presentingIndex].name) : 'Click to start'}</h4></div>
-                {presentedIndexes.length == Object.keys(meetingParticipants).length && presentedIndexes.length > 0 ? null : 
-                <div className="h-1/2"><SubmitWorkerNotes saveNotes={saveNotes} index={presentingIndex} /></div>}
+                {(presentedIndexes.length == Object.keys(meetingParticipants).length && presentedIndexes.length > 0) || presentingIndex < 0 ? null : 
+                    <div className="h-1/2"><SubmitWorkerNotes saveNotes={saveNotes} index={presentingIndex} /></div>}
                 </div>
-            } 
+            }
             </div>
         {/* Presented Column */}
-                <div className="flex flex-col items-center w-1/3 rounded-2xl border-2 border-solid border-grey-500 shadow-md bg-background-variant p-4">
+                <div className="flex flex-col items-center w-1/3 rounded-2xl border-2 border-solid border-grey-500 shadow-md bg-background-variant p-4 gap-2">
                     <h4 className="text-xl font-bold">Presented</h4>
                         <ul className="flex flex-col gap-2 w-3/4">
                         {presentedIndexes.map((index) => (
-                            <li key={index}>{meetingParticipants[index].name}
+                            <li key={index}>
                             <DisplayWorkerNotes meetingParticipant={meetingParticipants[index]} />
                             </li>
                         ))}

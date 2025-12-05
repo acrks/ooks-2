@@ -39,7 +39,7 @@ export default function SubmitWorkerNotes({saveNotes, index}: {saveNotes: (index
                     <FaHandPaper />
                 </Button>
             </div>
-            <Button className="cursor-pointer" onClick={() => saveNotes(index, type, ticketId, notes)}>Add</Button>
+            <Button disabled={ticketId.trim() === "" && notes.trim() === ""} className="cursor-pointer" onClick={() => saveNotes(index, type, ticketId, notes)}>Add</Button>
             </div>
         </div>
     );
