@@ -29,13 +29,13 @@ export default function SubmitWorkerNotes({saveNotes, index}: {saveNotes: (index
             />
             <div className="flex flex-col gap-2">
             <div className="flex flex-row justify-evenly">
-                <Button key={index}onClick={() => setType("wins")} className={`cursor-pointer self-start bg-yellow-500 ${type==='wins' ? 'ring-2 ring-offset-2 ring-yellow-500' : ''}`}>
+                <Button onClick={() => setType("wins")} className={`cursor-pointer self-start bg-yellow-500 ${type==='wins' ? 'ring-2 ring-offset-2 ring-yellow-500' : ''}`}>
                     <BsFillRocketTakeoffFill />
                 </Button>
-                <Button key={index}onClick={() => setType("needsPeerReview")} className={`cursor-pointer self-start bg-green-500 ${type==='needsPeerReview' ? 'ring-2 ring-offset-2 ring-green-500' : ''}`}>
+                <Button onClick={() => setType("needsPeerReview")} className={`cursor-pointer self-start bg-blue-900 ${type==='needsPeerReview' ? 'ring-2 ring-offset-2 ring-blue-900' : ''}`}>
                     <PiEyesFill />
                 </Button>
-                <Button key={index}onClick={() => setType("blockers")} className={`cursor-pointer self-start bg-red-500 ${type==='blockers' ? 'ring-2 ring-offset-2 ring-red-500' : ''}`}>
+                <Button onClick={() => setType("blockers")} className={`cursor-pointer self-start bg-red-500 ${type==='blockers' ? 'ring-2 ring-offset-2 ring-red-500' : ''}`}>
                     <FaHandPaper />
                 </Button>
             </div>

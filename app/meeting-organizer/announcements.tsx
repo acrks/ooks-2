@@ -57,8 +57,6 @@ export function Announcements() {
         setAnnouncement("")
     }
 
-    console.log('bg-' + announcementTypes["general"].bg)
-
     return (
         <div className="flex flex-col gap-2">
             <div className="flex flex-row gap-2 items-center">
