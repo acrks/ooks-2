@@ -57,6 +57,8 @@ export function Announcements() {
         setAnnouncement("")
     }
 
+    console.log('bg-' + announcementTypes["general"].bg)
+
     return (
         <div className="flex flex-col gap-2">
             <div className="flex flex-row gap-2 items-center">
@@ -77,11 +79,9 @@ export function Announcements() {
                 <div className="flex flex-row gap-4">
                 <Button disabled={announcement.trim() === ""} onClick={logAnnouncement} className="self-start cursor-pointer">Log Announcement</Button>
                 {Object.keys(announcementTypes).map((aType, index) => (
-                    <div key={index}>
-                        <Button onClick={() => switchAnnouncementType(aType)} className={`cursor-pointer self-start bg-${announcementTypes[aType].bg} ${announcementType === aType ? 'ring-2 ring-offset-2 ring-' + announcementTypes[aType].bg : ''}`}>
-                        {announcementTypes[aType].button}
-                        </Button>
-                    </div>
+                    <Button key={index}onClick={() => switchAnnouncementType(aType)} className={`cursor-pointer self-start bg-${announcementTypes[aType].bg} ${announcementType === aType ? 'ring-2 ring-offset-2 ring-' + announcementTypes[aType].bg : ''}`}>
+                    {announcementTypes[aType].button}
+                    </Button>
                 ))}
                 </div>
             </div>

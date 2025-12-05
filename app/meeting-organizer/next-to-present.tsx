@@ -80,10 +80,9 @@ export default function NextToPresent() {
                     <h4 className="text-xl font-bold">Presented</h4>
                         <ul className="flex flex-col gap-2 w-3/4">
                         {presentedIndexes.map((index) => (
-                            <>
-                            <li key={index}>{meetingParticipants[index].name}</li>
+                            <li key={index}>{meetingParticipants[index].name}
                             <DisplayWorkerNotes meetingParticipant={meetingParticipants[index]} />
-                            </>
+                            </li>
                         ))}
                         </ul>
                 </div>
