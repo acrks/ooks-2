@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { FaMinus } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { FaHandPaper } from "react-icons/fa";
 import { IoAlert } from "react-icons/io5";
 import { MdCelebration } from "react-icons/md";
 import { HiSpeakerphone } from "react-icons/hi";
@@ -86,7 +85,7 @@ export function Announcements() {
                 ))}
                 </div>
             </div>
-            )}  
+            )}
         </div>
     )
 }
