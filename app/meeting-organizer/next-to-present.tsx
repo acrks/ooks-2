@@ -82,7 +82,7 @@ export default function NextToPresent() {
             }
             </div>
         {/* Presented Column */}
-                <div className="flex flex-col items-center w-1/3 rounded-2xl border-2 border-solid border-grey-500 shadow-md bg-background-variant p-4 gap-2">
+                <div className="flex flex-col items-center h-min w-1/3 rounded-2xl border-2 border-solid border-grey-500 shadow-md bg-background-variant p-4 gap-2">
                     <h4 className="text-xl font-bold">Presented</h4>
                         <ul className="flex flex-col gap-2 w-3/4">
                         {presentedIndexes.map((index) => (
