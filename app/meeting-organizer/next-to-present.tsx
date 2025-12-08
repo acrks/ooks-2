@@ -25,15 +25,17 @@ export default function NextToPresent() {
         }
 
     const saveNotes = (index: number, type: 'wins' | 'needsPeerReview' | 'blockers', ticketId: string, notes: string) => {
-        console.log(index, meetingParticipants)
         if (type === 'wins') meetingParticipants[index].wins.push(
             { 'ticketId': ticketId,'notes' :notes }
         );
-        if (type === 'needsPeerReview') meetingParticipants[index].needsPeerReview.push(notes);
+        if (type === 'needsPeerReview') meetingParticipants[index].needsPeerReview.push(
+            { 'ticketId': ticketId,'notes' :notes }
+        );
         if (type === 'blockers') meetingParticipants[index].blockers.push(
             { 'ticketId': ticketId,'notes' :notes }
         );
     }
+
 
     function cuePresentingIndex(index: number) {
         if (presentingIndex >= 0) {
@@ -67,17 +69,11 @@ export default function NextToPresent() {
                 : <div className="flex flex-col min-h-1/2 gap-3 items-center">
                 <h4 className="text-xl font-bold">At Bat: </h4>
                 <div className="h-1/2">
-                <h4>{presentingIndex >= 0 ? (meetingParticipants[presentingIndex].name === 'QA' 
-                || meetingParticipants[presentingIndex].name === 'UX' 
-                || meetingParticipants[presentingIndex].name === 'Product' ? 
-                <div className="min-h-7/8">
-                    <h4 className="text-l font-bold">{meetingParticipants[presentingIndex].name}</h4>
-                    <ul>{subTeams[meetingParticipants[presentingIndex].name].map((member, index) => <li key={index}>{member} </li>)}</ul> 
-                </div>
-                    :
-                    meetingParticipants[presentingIndex].name) : 'Click to start'}</h4></div>
+                <h4>{presentingIndex >= 0 ? (
+                    null) : 'Click to start'}</h4>
+                    </div>
                 {(presentedIndexes.length == Object.keys(meetingParticipants).length && presentedIndexes.length > 0) || presentingIndex < 0 ? null : 
-                    <div className="h-1/2"><SubmitWorkerNotes saveNotes={saveNotes} index={presentingIndex} /></div>}
+                    <div className="h-1/2"><SubmitWorkerNotes saveNotes={saveNotes} index={presentingIndex} meetingParticipant={meetingParticipants[presentingIndex]} /></div>}
                 </div>
             }
             </div>

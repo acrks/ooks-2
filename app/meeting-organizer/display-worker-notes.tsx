@@ -1,15 +1,22 @@
 "use client";
 
-import { meetingParticipantsTraits } from "./const";
+import { meetingParticipantsTraits, subTeams } from "./const";
 import Link from "next/link";
+import { BASE_URL } from "./const";
 
 export default function DisplayWorkerNotes({meetingParticipant}: {meetingParticipant: meetingParticipantsTraits}) {
     const { name, wins, needsPeerReview, blockers } = meetingParticipant;
 
-    const BASE_URL = "https://targetcw.atlassian.net/browse/SNR-"
     return (
         <div className="flex flex-col gap-2 w-full p-4 rounded-xl bg-white">
-            <h4>{name}</h4>
+            {meetingParticipant.name === 'QA' 
+                            || meetingParticipant.name === 'UX' 
+                            || meetingParticipant.name === 'Product' ? 
+                            <div>
+                                <h4 className="text-l font-bold">{meetingParticipant.name}</h4>
+                                <ul>{subTeams[meetingParticipant.name].map((member, index) => <li key={index}>{member} </li>)}</ul> 
+                            </div> : <h4>{meetingParticipant.name}</h4>
+            }
             {wins.length === 0 && needsPeerReview.length === 0 && blockers.length === 0 ? null : <>
             <p className="text-lg font-bold">Notes</p>
             {wins.length > 0 ? (
@@ -18,7 +25,7 @@ export default function DisplayWorkerNotes({meetingParticipant}: {meetingPartici
                     <ul className="list-disc list-inside">
                         {wins.map((note, idx) => (
                             <li key={idx}>
-                                <Link href={`${BASE_URL}${note.ticketId}`} target="_blank" rel="noopener noreferrer">{note.ticketId}</Link>: {note.notes}
+                                <Link href={`${BASE_URL}${note.ticketId}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{note.ticketId}</Link>: {note.notes}
                             </li>
                         ))}
                     </ul>
@@ -30,7 +37,7 @@ export default function DisplayWorkerNotes({meetingParticipant}: {meetingPartici
                     <ul className="list-disc list-inside">
                         {needsPeerReview.map((link, idx) => (
                             <li key={idx}>
-                                {link}
+                                <Link href={`${BASE_URL}${link.ticketId}`} target="_blank" rel="noopener noreferrer">{link.ticketId}</Link>: {link.notes}
                             </li>
                         ))}
                     </ul>
@@ -42,7 +49,7 @@ export default function DisplayWorkerNotes({meetingParticipant}: {meetingPartici
                     <ul className="list-disc list-inside">
                         {blockers.map((note, idx) => (
                             <li key={idx}>
-                                {note.ticketId}: {note.notes}
+                                <Link href={`${BASE_URL}${note.ticketId}`} target="_blank" rel="noopener noreferrer">{note.ticketId}</Link>: {note.notes}
                             </li>
                         ))}
                     </ul>

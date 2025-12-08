@@ -1,16 +1,18 @@
 import { ReactElement } from "react"
 
+
+export const BASE_URL = "https://targetcw.atlassian.net/browse/SNR-"
+
+export interface meetingParticipantNote {
+    ticketId: string,
+    notes: string
+}
+
 export interface meetingParticipantsTraits {
-    name: "Alex" | "Tyler" | "Albert" | "Srini" | "Jay" | "Walter" | "Oliver" | "Ramzi" | "Dennis" | "Michael" | "Julie" | "QA" | "Product" | "UX" | "Travis",
-    wins: {
-        ticketId: string,
-        notes: string
-    }[],
-    needsPeerReview: string[],
-    blockers: {
-        ticketId: string,
-        notes: string
-    }[]
+    name: "Alex" | "Tyler" | "Albert" | "Srinivas" | "Jay" | "Walter" | "Oliver" | "Ramzi" | "Dennis" | "Michael" | "Julie" | "QA" | "Product" | "UX" | "Travis",
+    wins: meetingParticipantNote[],
+    needsPeerReview: meetingParticipantNote[],
+    blockers: meetingParticipantNote[]
 }
 
 type MeetingParticipantsType = Record<number, meetingParticipantsTraits>
@@ -19,7 +21,7 @@ export const meetingParticipants: MeetingParticipantsType = {
     1: { name: 'Alex', wins: [], needsPeerReview: [], blockers: [] },
     2: { name: 'Tyler', wins: [], needsPeerReview: [], blockers: [] },
     3: { name: 'Albert', wins: [], needsPeerReview: [], blockers: [] },
-    4: { name: 'Srini', wins: [], needsPeerReview: [], blockers: [] },
+    4: { name: 'Srinivas', wins: [], needsPeerReview: [], blockers: [] },
     5: { name: 'Jay', wins: [], needsPeerReview: [], blockers: [] },
     6: { name: 'Walter', wins: [], needsPeerReview: [], blockers: [] },
     7: { name: 'Oliver', wins: [], needsPeerReview: [], blockers: [] },
@@ -44,6 +46,12 @@ export const themes = {
     "Wednesday": "How has the week gone thus far and any change in your plans for the rest of the week?",
     "Friday": "How did the week go? Did it go as planned?",
     "default": "No meeting scheduled today."
+}
+
+export const notesPlaceholderText = {
+    "wins": "Enter your wins here...",
+    "needsPeerReview": "Enter peer review notes here...",
+    "blockers": "Enter blockers here..."
 }
 
 export interface announcementTraits {

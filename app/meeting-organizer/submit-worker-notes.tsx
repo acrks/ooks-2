@@ -4,42 +4,49 @@ import { Button } from "@/components/ui/button";
 import { FaHandPaper } from "react-icons/fa";
 import { PiEyesFill } from "react-icons/pi";
 import { BsFillRocketTakeoffFill } from "react-icons/bs";
+import { meetingParticipantNote, meetingParticipantsTraits, notesPlaceholderText } from "./const";
 
 import { useState } from "react";
+import DisplayWorkerNotes from "./display-worker-notes";
 
-export default function SubmitWorkerNotes({saveNotes, index}: {saveNotes: (index: number, type: 'wins' | 'needsPeerReview' | 'blockers', ticketId: string, notes: string) => void, index:number}) {
+export default function SubmitWorkerNotes({saveNotes, index, meetingParticipant}: {saveNotes: (index: number, type: 'wins' | 'needsPeerReview' | 'blockers', ticketId: string, notes: string) => void, index:number, meetingParticipant: meetingParticipantsTraits}) {
     const [type, setType] = useState<'wins' | 'needsPeerReview' | 'blockers'>("wins");
-    const [notes, setNotes] = useState("");
+    const [note, addToNotes] = useState("");
     const [ticketId, setTicketId] = useState("");
+    const [typeTheme, setTypeTheme] = useState<"bg-yellow-50" | "bg-blue-50" | "bg-red-50">("bg-yellow-50");
 
     return (
         <div className="flex flex-col gap-2 w-full">
-            <h4 className="text-lg font-bold">Notes</h4>
+            <DisplayWorkerNotes meetingParticipant={meetingParticipant} />
             <input type="text"
-                className="w-full p-2 border-2 border-solid border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                className={`w-full p-2 border-2 border-solid border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${typeTheme}`}
                 placeholder="Enter ticket ID here..."
                 value={ticketId}
                 onChange={e => setTicketId(e.target.value)}
             />
             <input type="text"
-                className="w-full justify-start h-16 p-2 border-2 border-solid border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-white"
-                placeholder="Enter your notes here..."
-                value={notes}
-                onChange={e => setNotes(e.target.value)}
+                className={`w-full justify-start h-16 p-2 border-2 border-solid border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none ${typeTheme}`}
+                placeholder={notesPlaceholderText[type]}
+                value={note}
+                onChange={e => addToNotes(e.target.value)}
             />
             <div className="flex flex-col gap-2">
             <div className="flex flex-row justify-evenly">
-                <Button onClick={() => setType("wins")} className={`cursor-pointer self-start bg-yellow-500 ${type==='wins' ? 'ring-2 ring-offset-2 ring-yellow-500' : ''}`}>
+                <Button onClick={() => {setType("wins"); setTypeTheme("bg-yellow-50")}} className={`cursor-pointer self-start bg-yellow-500 ${type==='wins' ? 'ring-2 ring-offset-2 ring-yellow-500' : ''}`}>
                     <BsFillRocketTakeoffFill />
                 </Button>
-                <Button onClick={() => setType("needsPeerReview")} className={`cursor-pointer self-start bg-blue-900 ${type==='needsPeerReview' ? 'ring-2 ring-offset-2 ring-blue-900' : ''}`}>
+                <Button onClick={() => {setType("needsPeerReview"); setTypeTheme("bg-blue-50")}} className={`cursor-pointer self-start bg-blue-900 ${type==='needsPeerReview' ? 'ring-2 ring-offset-2 ring-blue-900' : ''}`}>
                     <PiEyesFill />
                 </Button>
-                <Button onClick={() => setType("blockers")} className={`cursor-pointer self-start bg-red-500 ${type==='blockers' ? 'ring-2 ring-offset-2 ring-red-500' : ''}`}>
+                <Button onClick={() => {setType("blockers"); setTypeTheme("bg-red-50")}} className={`cursor-pointer self-start bg-red-500 ${type==='blockers' ? 'ring-2 ring-offset-2 ring-red-500' : ''}`}>
                     <FaHandPaper />
                 </Button>
             </div>
-            <Button disabled={ticketId.trim() === "" && notes.trim() === ""} className="cursor-pointer" onClick={() => saveNotes(index, type, ticketId, notes)}>Add</Button>
+            <Button disabled={ticketId.trim() === "" || note.trim() === ""} className="cursor-pointer" onClick={() => 
+                {   
+                    addToNotes("");
+                    setTicketId("");
+                    saveNotes(index, type, ticketId, note)}}>Add</Button>
             </div>
         </div>
     );
