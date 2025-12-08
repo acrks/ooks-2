@@ -2,15 +2,20 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { meetingParticipants , subTeams } from "./const";
+import { BASE_URL, meetingParticipants } from "./const";
 import SubmitWorkerNotes from "./submit-worker-notes";
 import DisplayWorkerNotes from "./display-worker-notes";
 import { HiChevronDoubleRight } from "react-icons/hi";
+import { FiCopy } from "react-icons/fi";
+import { LuCopyCheck } from "react-icons/lu";
+
+
 
 export default function NextToPresent() {
     const [presentingIndex, setPresentingIndex] = useState(-1);
     const [presentedIndexes, setPresentedIndexes] = useState<number[]>([]);
     const [yetToPresentIndexes, setYetToPresentIndexes] = useState<number[]>(Object.keys(meetingParticipants).map(Number));
+    const [copied, setCopied] = useState(false);
     
     const spinTheWheel = () => {
         const oldIndex = presentingIndex;
@@ -36,6 +41,29 @@ export default function NextToPresent() {
         );
     }
 
+    const copyPresentedSummaryToClipboard = () => {
+        let wins = "";
+        let needsPeerReview = "";
+        let blockers = "";
+        let summary = "";
+        (presentedIndexes.map((index) => {
+            const participant = meetingParticipants[index];
+            if (participant.wins.length > 0) {
+                wins += `\n${participant.wins.map(win => `- [${win.ticketId}](${BASE_URL}${win.ticketId}): ${win.notes} - ${participant.name}`).join('\n')}\n`;
+            }
+            if (participant.needsPeerReview.length > 0) {
+                needsPeerReview += `\n${participant.needsPeerReview.map(pr => `- [${pr.ticketId}](${BASE_URL}${pr.ticketId}): ${pr.notes} - ${participant.name}`).join('\n')}\n`;
+            }
+            if (participant.blockers.length > 0) {
+                blockers += `\n${participant.blockers.map(blocker => `- [${blocker.ticketId}](${BASE_URL}${blocker.ticketId}): ${blocker.notes} - ${participant.name}`).join('\n')}\n`;
+            }
+            return summary;
+        }).join('\n'));
+        summary += `**Wins:**\n` + wins + `\n**Needs Peer Review:**\n` + needsPeerReview + `\n**Blockers:**\n` + blockers;
+        navigator.clipboard.writeText(summary);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    }
 
     function cuePresentingIndex(index: number) {
         if (presentingIndex >= 0) {
@@ -79,7 +107,9 @@ export default function NextToPresent() {
             </div>
         {/* Presented Column */}
                 <div className="flex flex-col items-center h-min w-1/3 rounded-2xl border-2 border-solid border-grey-500 shadow-md bg-background-variant p-4 gap-2">
-                    <h4 className="text-xl font-bold">Presented</h4>
+                <div className="flex flex-row gap-4 items-center">
+                    <h4 className="text-xl font-bold">Presented</h4><FiCopy className={`cursor-pointer ${copied ? 'hidden' : 'inline-block'}`} onClick={() => copyPresentedSummaryToClipboard()} /><LuCopyCheck className={`text-green-500 ${copied ? 'inline-block' : 'hidden'}`} />
+                </div>
                         <ul className="flex flex-col gap-2 w-3/4">
                         {presentedIndexes.map((index) => (
                             <li key={index}>
