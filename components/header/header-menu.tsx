@@ -22,6 +22,11 @@ export function HeaderMenu() {
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+            <Link href="/lists">Lists</Link>
+          </NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
             <Link href="/meeting-organizer">Meeting Organizer</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>

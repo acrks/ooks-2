@@ -52,6 +52,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  lists         List[]
 
   @@map("users")
 }
@@ -63,4 +64,28 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_tokens")
+}
+
+model List {
+  id        String   @id @default(cuid())
+  title     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  users User[]
+  @@map("lists")
+  listItems ListItem[]
+}
+
+model ListItem {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  checked   Boolean  @default(false)
+  listId    String   @map("list_id")
+
+  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  @@map("list_items")
 }
