@@ -16,17 +16,17 @@ export function HeaderMenu() {
         <NavigationMenu>
             <NavigationMenuList className='flex-wrap'>
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <NavigationMenuLink asChild>
             <Link href="/">Home</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <NavigationMenuLink asChild>
             <Link href="/lists">Lists</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+          <NavigationMenuLink asChild>
             <Link href="/meeting-organizer">Meeting Organizer</Link>
           </NavigationMenuLink>
         </NavigationMenuItem>
