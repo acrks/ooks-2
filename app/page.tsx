@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 
 export default async function Home() {
   const session = await auth();
-  // console.log("Session:", session);
+
   let user = null;
 
   if (session) {

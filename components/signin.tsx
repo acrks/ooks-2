@@ -1,14 +1,21 @@
-import { signIn } from "@/auth"
- 
+"use client"
+
+import { login } from "@/lib/actions/auth";
+
 export default function SignIn() {
   return (
-    <form
-      action={async () => {
-        "use server"
-        await signIn("github")
-      }}
-    >
-      <button type="submit">Sign In with GitHub</button>
-    </form>
-  )
-} 
+    <div>
+      <form action={login.bind(null, "github")}>
+        <button type="submit">
+          Sign in with GitHub
+        </button>
+      </form>
+
+      <form action={login.bind(null, "google")}>
+        <button type="submit">
+          Sign in with Google
+        </button>
+      </form>
+    </div>
+  );
+}

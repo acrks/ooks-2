@@ -53,7 +53,9 @@ model User {
   accounts      Account[]
   sessions      Session[]
   lists         List[]
-
+  groups        Group[]
+  companyId     String    @default("1") @map("company_id")
+  company       Company   @relation(fields: [companyId], references: [id])
   @@map("users")
 }
 
@@ -88,4 +90,27 @@ model ListItem {
   list List @relation(fields: [listId], references: [id], onDelete: Cascade)
 
   @@map("list_items")
+}
+
+model Company {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  groups    Group[]
+  users     User[]
+  @@map("companies")
+}
+
+model Group {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  companyId String   @map("company_id")
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  users   User[]
+
+  @@map("groups")
 }
