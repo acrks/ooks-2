@@ -52,7 +52,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  lists         List[]
+  lists         UserLists[]
   companyId     String    @default("1") @map("company_id")
   company       Company   @relation(fields: [companyId], references: [id])
   Groups        UsersInGroups[]
@@ -74,7 +74,7 @@ model List {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  users User[]
+  users UserLists[]
   @@map("lists")
   listItems ListItem[]
 }
@@ -124,4 +124,15 @@ model UsersInGroups {
 
   @@id([userId, groupId])
   @@map("users_in_groups")
+}
+
+model UserLists {
+  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
+  listId String @map("list_id")
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @map("user_id")
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([listId, userId])
 }
