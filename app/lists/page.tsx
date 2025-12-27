@@ -15,7 +15,7 @@ export default async function ListsPage() {
             {/* List content goes here */}
             {lists.map((list, index) => (
                 <div key={list.id} className="mb-4 p-4 border rounded">
-                    <h2 className="text-xl font-semibold mb-2">{list.name}</h2>
+                    <h2 className="text-xl font-semibold mb-2">{list.title}</h2>
                     <ul className="list-disc list-inside">
                         {list.listItems.map((item, index) => (
                             <li key={item.id}>{item.content}</li>
