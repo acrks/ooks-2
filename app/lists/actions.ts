@@ -2,12 +2,12 @@
 
 import prisma from "@/lib/prisma";
 
-export async function getDefaultListData(
-    userId: string
-): Promise<
+export async function getDefaultListData(userId: string): Promise<
     {
         id: string;
         title: string;
+        primary?: boolean;
+        favorite?: boolean;
         listItems: { id: string; content: string }[];
     }[]
 > {
@@ -15,9 +15,9 @@ export async function getDefaultListData(
         where: {
             users: {
                 some: {
-                    user: {
-                        id: userId,
-                    },
+                    userId,
+                    primary: true,
+                    favorite: true,
                 },
             },
         },

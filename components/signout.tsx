@@ -1,14 +1,12 @@
-import { signOut } from "@/auth"
- 
+"use client";
+
+import { signOut } from "next-auth/react";
+import { DropdownMenuItem } from "./ui/dropdown-menu";
+
 export default function SignOut() {
-  return (
-    <form
-      action={async () => {
-        "use server"
-        await signOut()
-      }}
-    >
-      <button type="submit">Sign Out</button>
-    </form>
-  )
-} 
+    return (
+        <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
+            Log out
+        </DropdownMenuItem>
+    );
+}

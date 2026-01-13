@@ -103,7 +103,7 @@ model Company {
 }
 
 model Group {
-  id        String   @id @default(cuid()) 
+  id        String   @id @default(cuid())
   name      String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -131,6 +131,13 @@ model UserLists {
   listId String @map("list_id")
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @map("user_id")
+  isOwner   Boolean @default(false)
+  canDelete Boolean @default(false)
+  canEdit   Boolean @default(false)
+  canInvite Boolean @default(false)
+  canView   Boolean @default(true)
+  primary   Boolean @default(false)
+  favorite  Boolean @default(false)
   assignedAt DateTime @default(now())
   assignedBy String
 

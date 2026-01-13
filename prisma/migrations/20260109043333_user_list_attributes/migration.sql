@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "UserLists" ADD COLUMN     "canDelete" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "canEdit" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "canInvite" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "canView" BOOLEAN NOT NULL DEFAULT true,
+ADD COLUMN     "isOwner" BOOLEAN NOT NULL DEFAULT false;

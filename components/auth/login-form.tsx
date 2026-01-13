@@ -1,10 +1,7 @@
-import SignIn from "@/components/signin";
-
-export default function SignInPage() {
+export default function LoginForm() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <>
             <h1 className="text-4xl font-bold mb-4">Sign In</h1>
-            <SignIn />
             <form className="flex flex-col space-y-4 w-64">
                 <input
                     type="email"
@@ -23,6 +20,6 @@ export default function SignInPage() {
                     Sign In
                 </button>
             </form>
-        </div>
+        </>
     );
 }
