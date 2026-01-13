@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { NavBar } from "@/components/header/navbar";
-import { HeaderMenu } from "@/components/header/header-menu";
 import { auth } from "@/auth";
 import { Session } from "next-auth";
-import prisma from "@/lib/prisma";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",

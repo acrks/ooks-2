@@ -1,7 +1,6 @@
 import { getDefaultListData } from "./actions";
 import ListCard from "./list-card";
 import { auth } from "@/auth";
-import CreateListForm from "./create-list/form";
 
 export default async function ListsPage() {
     const session = await auth();
@@ -15,7 +14,7 @@ export default async function ListsPage() {
             <h1 className="text-2xl font-bold mb-4">Your Lists</h1>
             {/* List content goes here */}
             {/* Master list */}
-            
+
             {/* Other two most recently visited lists */}
             {lists.map((list) => (
                 <div key={list.id} className="mb-4 p-4 border rounded">

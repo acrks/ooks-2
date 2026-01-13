@@ -1,5 +1,3 @@
-import SignIn from "@/components/signin";
-import SignOut from "@/components/signout";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 
