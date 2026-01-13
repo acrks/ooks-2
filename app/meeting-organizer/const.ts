@@ -23,6 +23,9 @@ export interface meetingParticipantsTraits {
         | "QA"
         | "Product"
         | "UX"
+        | "Apollo"
+        | "Alan"
+        | "Trisha"
         | "Travis";
     wins: meetingParticipantNote[];
     needsPeerReview: meetingParticipantNote[];
@@ -47,12 +50,16 @@ export const meetingParticipants: MeetingParticipantsType = {
     13: { name: "Product", wins: [], needsPeerReview: [], blockers: [] },
     14: { name: "UX", wins: [], needsPeerReview: [], blockers: [] },
     15: { name: "Travis", wins: [], needsPeerReview: [], blockers: [] },
+    16: { name: "Apollo", wins: [], needsPeerReview: [], blockers: [] },
+    17: { name: "Alan", wins: [], needsPeerReview: [], blockers: [] },
+    18: { name: "Trisha", wins: [], needsPeerReview: [], blockers: [] },
 };
 
 export const subTeams = {
     UX: ["Chris", "Hanley", "Jonathan"],
     QA: ["Ben", "Fernando", "Yuga", "Kiefer"],
     Product: ["Al", "Chinny"],
+    Apollo: ["Halle", "Julian"],
 };
 
 export const themes = {

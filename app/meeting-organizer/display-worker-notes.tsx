@@ -15,6 +15,7 @@ export default function DisplayWorkerNotes({
         <div className="flex flex-col gap-2 w-full grow p-4 rounded-xl bg-white">
             {meetingParticipant.name === "QA" ||
             meetingParticipant.name === "UX" ||
+            meetingParticipant.name === "Apollo" ||
             meetingParticipant.name === "Product" ? (
                 <div className="flex flex-col grow w-full justify-start">
                     <h4 className="text-l font-bold w-full">
