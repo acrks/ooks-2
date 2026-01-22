@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Session } from "next-auth";
 import { usePathname } from "next/navigation";
 import { DropdownMenu } from "@radix-ui/react-dropdown-menu";
 import {
@@ -17,9 +16,11 @@ import {
     DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
-export function NavBar({ session }: { session: Session | null }) {
+export function NavBar() {
     const pathname = usePathname();
+    const { data: currentSession } = useSession();
     if (pathname.includes("/login")) {
         return (
             <div className="w-full flex justify-end items-center border-b-2 border-solid border-gray-300 p-2">
@@ -29,7 +30,7 @@ export function NavBar({ session }: { session: Session | null }) {
             </div>
         );
     }
-    if (!session) {
+    if (!currentSession) {
         return (
             <div className="w-full flex justify-end items-center border-b-2 border-solid border-gray-300 p-2">
                 <div className="pr-4">
@@ -48,7 +49,7 @@ export function NavBar({ session }: { session: Session | null }) {
 
                 <Link href="/meeting-organizer">Meeting Organizer</Link>
             </div>
-            <div className="w-1/3 flex justify-end pr-4">
+            <div className="w-1/3 flex justify-end pr-4 cursor-pointer">
                 <DropdownMenu>
                     <DropdownMenuTrigger>Profile</DropdownMenuTrigger>
                     <DropdownMenuContent className="w-56" align="start">
@@ -88,7 +89,6 @@ export function NavBar({ session }: { session: Session | null }) {
                             </DropdownMenuSub>
                             <DropdownMenuItem>New Team</DropdownMenuItem>
                         </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
                             onClick={() => signOut({ callbackUrl: "/" })}

@@ -1,25 +1,24 @@
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+
 export default function LoginForm() {
+    const [email, setEmail] = useState("");
     return (
         <>
-            <h1 className="text-4xl font-bold mb-4">Sign In</h1>
-            <form className="flex flex-col space-y-4 w-64">
+            <h1 className="text-4xl font-bold mb-4">Sign In Via Email</h1>
+            <div className="flex flex-col gap-2 w-1/3 justify-center items-center">
                 <input
-                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
-                    className="p-2 border border-gray-300 rounded"
-                />
-                <input
-                    type="password"
-                    placeholder="Password"
-                    className="p-2 border border-gray-300 rounded"
+                    className="p-2 border border-gray-300 rounded w-full"
                 />
                 <button
-                    type="submit"
-                    className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    onClick={() => signIn("email", { email, callbackUrl: "/" })}
+                    className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 w-1/4"
                 >
                     Sign In
                 </button>
-            </form>
+            </div>
         </>
     );
 }
