@@ -1,4 +1,4 @@
-import { getDefaultListData } from "./actions";
+import { getDefaultListData } from "@/app/lists/actions";
 import ListCard from "./list-card";
 import { auth } from "@/auth";
 
