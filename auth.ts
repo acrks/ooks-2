@@ -55,4 +55,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             });
         },
     },
+    pages: {
+        signIn: "/login", // your frontend page
+    },
+    callbacks: {
+        async redirect({ url, baseUrl }) {
+            // always redirect users to your app domain
+            if (url.startsWith("/")) return `${baseUrl}${url}`;
+            return baseUrl;
+        },
+    },
 });
