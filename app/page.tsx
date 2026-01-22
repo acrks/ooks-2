@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
 
+export const runtime = "nodejs";
+
 export default async function Home() {
     const session = await auth();
 
