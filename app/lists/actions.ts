@@ -2,8 +2,6 @@
 
 import prisma from "@/lib/prisma";
 
-export const runtime = "nodejs";
-
 export async function getDefaultListData(userId: string): Promise<
     {
         id: string;
