@@ -1,0 +1,9 @@
+{
+    "redirects": [
+        {
+            "source": "/((?!api/).*)",
+            "destination": "https://ooks.app/$1",
+            "permanent": true
+        }
+    ]
+}
