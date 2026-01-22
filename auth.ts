@@ -4,7 +4,9 @@ import prisma from "@/lib/prisma";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
-import { OWNER_PERMS } from "./app/lists/const";
+import { OWNER_PERMS } from "@/lib/consts/permissions";
+
+export const runtime = "nodejs";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: PrismaAdapter(prisma),
