@@ -55,7 +55,13 @@ export function NavBar() {
                     <DropdownMenuContent className="w-56" align="start">
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>Profile</DropdownMenuItem>
+                            <DropdownMenuItem
+                                onSelect={() =>
+                                    (window.location.href = "/profile")
+                                }
+                            >
+                                Profile
+                            </DropdownMenuItem>
                             {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
                             <DropdownMenuItem
                                 onSelect={() =>

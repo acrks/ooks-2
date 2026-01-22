@@ -14,7 +14,7 @@ export default function LoginForm() {
                 />
                 <button
                     onClick={() => signIn("email", { email, callbackUrl: "/" })}
-                    className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 w-1/4"
+                    className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 w-1/4 cursor-pointer"
                 >
                     Sign In
                 </button>

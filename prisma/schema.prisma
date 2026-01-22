@@ -118,7 +118,12 @@ model Group {
 model UsersInGroups {
   userId  String @map("user_id")
   groupId String @map("group_id")
-
+  isOwner   Boolean @default(false)
+  canDelete Boolean @default(false)
+  canEdit   Boolean @default(false)
+  canInvite Boolean @default(false)
+  canView   Boolean @default(true)
+  assignedAt DateTime @default(now())
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
@@ -140,6 +145,5 @@ model UserLists {
   favorite  Boolean @default(false)
   assignedAt DateTime @default(now())
   assignedBy String
-
   @@id([listId, userId])
 }
