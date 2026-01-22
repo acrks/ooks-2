@@ -1,9 +1,19 @@
 {
-    "redirects": [
+    "rewrites": [
         {
-            "source": "/((?!api/).*)",
-            "destination": "https://ooks.app/$1",
-            "permanent": true
+            "source": "/login",
+            "destination": "/login"
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Strict-Transport-Security",
+                    "value": "max-age=63072000; includeSubDomains; preload"
+                }
+            ]
         }
     ]
 }
