@@ -9,7 +9,7 @@ import { OWNER_PERMS } from "@/lib/consts/permissions";
 import Email from "@auth/core/providers/email";
 
 import sgMail from "@sendgrid/mail";
-sgMail.setApiKey(process.env.SENDGRID_API_KEY!);
+sgMail.setApiKey(process.env.EMAIL_SERVER_PASSWORD!);
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -17,7 +17,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         GitHub,
         Google,
         Email({
-            from: process.env.EMAIL_FROM!,
+            server: {
+                host: process.env.EMAIL_SERVER_HOST,
+                port: Number(process.env.EMAIL_SERVER_PORT),
+                auth: {
+                    user: process.env.EMAIL_SERVER_USER,
+                    pass: process.env.EMAIL_SERVER_PASSWORD,
+                },
+            },
+            from: process.env.EMAIL_FROM,
             async sendVerificationRequest({ identifier, url }) {
                 await sgMail.send({
                     to: identifier,
