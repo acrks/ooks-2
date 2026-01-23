@@ -9,29 +9,6 @@ export default async function GroupsPage() {
 
     const userId = session?.user?.id;
 
-    const users = await prisma.user.findMany({
-        where: {
-            Groups: {
-                some: {
-                    group: {
-                        Users: {
-                            some: {
-                                userId: userId,
-                            },
-                        },
-                    },
-                },
-            },
-        },
-        distinct: ["id"],
-        include: {
-            Groups: {
-                include: {
-                    group: true,
-                },
-            },
-        },
-    });
     return (
         <div>
             <h1>Groups Page</h1>
