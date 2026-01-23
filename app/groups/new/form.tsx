@@ -58,7 +58,7 @@ export default function NewGroupForm({ users }: { users: CompanyUser[] }) {
                                         value: option.value,
                                         label: option.text,
                                     }));
-                                    setSelectedUsers(selected);
+                                    setSelectedUsers([...selected]);
                                 }}
                                 required
                             >

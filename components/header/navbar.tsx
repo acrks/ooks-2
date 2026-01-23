@@ -91,6 +91,13 @@ export function NavBar() {
                             </DropdownMenuSub>
                             <DropdownMenuItem
                                 onSelect={() =>
+                                    (window.location.href = "/groups")
+                                }
+                            >
+                                View all
+                            </DropdownMenuItem>
+                            <DropdownMenuItem
+                                onSelect={() =>
                                     (window.location.href = "/groups/new")
                                 }
                             >
