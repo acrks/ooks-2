@@ -1,5 +1,6 @@
 import GroupContent from "./content";
 
-export default function GroupsPage() {
+export default async function GroupsPage() {
+    await prisma.group.findMany();
     return <GroupContent />;
 }

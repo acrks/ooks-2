@@ -40,18 +40,23 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         signIn: "/login", // your frontend page
     },
     callbacks: {
-        async signIn({ user }) {
+        async signIn({ user, account }) {
             // user = the user object returned by NextAuth
             // account = OAuth or Email account info
 
-            // Check if the user exists in your DB (extra safety)
-            const existingUser = await prisma.user.findUnique({
-                where: { email: user.email ?? undefined },
-            });
+            if (!account) {
+                return false; // Reject sign-in if account is null
+            }
 
-            if (!existingUser) {
-                // Redirect to signup page
-                return "/signup"; // NextAuth will redirect here
+            if (account.provider === "email") {
+                const existingUser = await prisma.user.findUnique({
+                    where: { email: user.email ?? undefined },
+                });
+
+                if (!existingUser) {
+                    // Redirect to signup page
+                    return "/signup"; // NextAuth will redirect here
+                }
             }
 
             return true; // Allow sign-in to proceed normally
