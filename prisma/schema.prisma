@@ -57,7 +57,7 @@ model User {
   lists         UserLists[]
   companyId     String    @default("1") @map("company_id")
   company       Company   @relation(fields: [companyId], references: [id])
-  Groups        UsersInGroups[]
+  groups        UsersInGroups[]
   @@map("users")
 }
 
@@ -112,7 +112,7 @@ model Group {
   companyId String   @map("company_id")
 
   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  Users   UsersInGroups[]
+  users UsersInGroups[]
 
   @@map("groups")
 }
@@ -126,10 +126,13 @@ model UsersInGroups {
   canInvite Boolean @default(false)
   canView   Boolean @default(true)
   assignedAt DateTime @default(now())
+
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
 
   @@id([userId, groupId])
+  @@index([userId], name: "idx_user_id")
+  @@index([groupId], name: "idx_group_id")
   @@map("users_in_groups")
 }
 

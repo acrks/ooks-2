@@ -4,8 +4,6 @@ import prisma from "@/lib/prisma";
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 
-import { OWNER_PERMS } from "@/lib/consts/permissions";
-
 import Email from "@auth/core/providers/email";
 
 import sgMail from "@sendgrid/mail";
