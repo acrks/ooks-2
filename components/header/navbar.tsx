@@ -73,7 +73,7 @@ export function NavBar() {
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>Team</DropdownMenuItem>
+                            <DropdownMenuLabel>Groups</DropdownMenuLabel>
                             <DropdownMenuSub>
                                 <DropdownMenuSubTrigger>
                                     Invite users
@@ -86,14 +86,16 @@ export function NavBar() {
                                         <DropdownMenuItem>
                                             Message
                                         </DropdownMenuItem>
-                                        <DropdownMenuSeparator />
-                                        {/* <DropdownMenuItem>
-                                            More...
-                                        </DropdownMenuItem> */}
                                     </DropdownMenuSubContent>
                                 </DropdownMenuPortal>
                             </DropdownMenuSub>
-                            <DropdownMenuItem>New Team</DropdownMenuItem>
+                            <DropdownMenuItem
+                                onSelect={() =>
+                                    (window.location.href = "/groups/new")
+                                }
+                            >
+                                New Group
+                            </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem

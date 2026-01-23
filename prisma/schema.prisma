@@ -58,6 +58,7 @@ model User {
   companyId     String    @default("1") @map("company_id")
   company       Company   @relation(fields: [companyId], references: [id])
   groups        UsersInGroups[]
+  notifications Notifications[]
   @@map("users")
 }
 
@@ -79,6 +80,7 @@ model List {
   users UserLists[]
   @@map("lists")
   listItems ListItem[]
+  invites ListInvites[]
 }
 
 model ListItem {
@@ -101,6 +103,7 @@ model Company {
   updatedAt DateTime @updatedAt @map("updated_at")
   groups    Group[]
   users     User[]
+  invites   CompanyInvites[]
   @@map("companies")
 }
 
@@ -113,6 +116,7 @@ model Group {
 
   company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
   users UsersInGroups[]
+  invites GroupInvites[]
 
   @@map("groups")
 }
@@ -151,4 +155,58 @@ model UserLists {
   assignedAt DateTime @default(now())
   assignedBy String
   @@id([listId, userId])
+}
+
+model ListInvites {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  invitedBy String
+  listId String   @map("list_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  expiresAt DateTime @map("expires_at")
+
+  list List @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  @@map("list_invites")
+}
+
+model GroupInvites {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  invitedBy String
+  groupId   String   @map("group_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  expiresAt DateTime @map("expires_at")
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+
+  @@map("group_invites")
+}
+
+model CompanyInvites {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  invitedBy String
+  companyId String   @map("company_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  expiresAt DateTime @map("expires_at")
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+
+  @@map("company_invites")
+}
+
+model Notifications {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  content   String
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
 }
