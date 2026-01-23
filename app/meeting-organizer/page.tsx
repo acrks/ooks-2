@@ -1,8 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-
 import { getDay } from "./utils";
 import MeetingTheme from "./theme";
 import NextToPresent from "./next-to-present";

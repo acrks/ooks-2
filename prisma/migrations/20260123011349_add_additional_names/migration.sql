@@ -1,0 +1,10 @@
+/*
+  Warnings:
+
+  - Made the column `name` on table `users` required. This step will fail if there are existing NULL values in that column.
+
+*/
+-- AlterTable
+ALTER TABLE "users" ADD COLUMN     "family_name" TEXT,
+ADD COLUMN     "given_name" TEXT,
+ALTER COLUMN "name" SET NOT NULL;

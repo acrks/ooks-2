@@ -4,11 +4,10 @@ import { useSession } from "next-auth/react";
 
 export default function ProfileContent() {
     const { data: session } = useSession();
-
+    console.log("Session data in ProfileContent:", session);
     if (!session) {
         return (
             <div className="container mx-auto p-4">
-                <h1 className="text-2xl font-bold mb-4">Profile Page</h1>
                 <p>You must be logged in to view this page.</p>
             </div>
         );

@@ -36,29 +36,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         }),
     ],
-    events: {
-        async createUser({ user }) {
-            // This runs ONLY on first OAuth signup
-            if (!user.id) return;
-
-            await prisma.list.create({
-                data: {
-                    title: user.name + "'s Master List",
-                    users: {
-                        create: {
-                            ...OWNER_PERMS,
-                            userId: user.id,
-                            assignedBy: user.id,
-                        },
-                    },
-                },
-            });
-        },
-    },
     pages: {
         signIn: "/login", // your frontend page
     },
     callbacks: {
+        async signIn({ user }) {
+            // user = the user object returned by NextAuth
+            // account = OAuth or Email account info
+
+            // Check if the user exists in your DB (extra safety)
+            const existingUser = await prisma.user.findUnique({
+                where: { email: user.email ?? undefined },
+            });
+
+            if (!existingUser) {
+                // Redirect to signup page
+                return "/signup"; // NextAuth will redirect here
+            }
+
+            return true; // Allow sign-in to proceed normally
+        },
         async redirect({ url, baseUrl }) {
             // always redirect users to your app domain
             if (url.startsWith("/")) return `${baseUrl}${url}`;

@@ -9,6 +9,7 @@ export default async function ListsPage() {
         return <div>Please log in to view your lists.</div>;
     }
     const lists = await getDefaultListData(userId);
+
     return (
         <div>
             <h1 className="text-2xl font-bold mb-4">Your Lists</h1>
